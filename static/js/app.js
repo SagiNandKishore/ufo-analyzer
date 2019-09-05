@@ -17,7 +17,12 @@ tableData.forEach(function(record){
 
 
 filterCommander.on("click", function(){
-    input_date = document.getElementById("datetime").value; 
+    input_date = document.getElementById("datetime").value;
+    input_city = document.getElementById("city").value;
+    input_state = document.getElementById("state").value;
+    input_country = document.getElementById("country").value;
+    input_shape = document.getElementById("shape").value;
+
     var dataFiltered = tableData.filter(filterData)
     var tbody = d3.select("tbody");
     tbody.html("")  //reset the content of the Table Body to empty HTML
@@ -36,5 +41,26 @@ filterCommander.on("click", function(){
 
 
 function filterData(record){
-    return record.datetime === input_date
+    var dt_check = true;
+    var city_check = true;
+    var state_check = true;
+    var country_check = true;
+    var shape_check = true;
+
+    if ((input_date.length > 0 ) && (record.datetime.toUpperCase() != input_date.toUpperCase()))
+    {dt_check = false}
+
+    if ((input_city.length > 0 ) && (record.city.toUpperCase() != input_city.toUpperCase()))
+    {city_check = false}
+
+    if ((input_state.length > 0 ) && (record.state.toUpperCase() != input_state.toUpperCase()))
+    {city_check = false}
+
+    if ((input_country.length > 0 ) && (record.country.toUpperCase() != input_country.toUpperCase()))
+    {city_check = false}
+
+    if ((input_shape.length > 0 ) && (record.shape.toUpperCase() != input_shape.toUpperCase()))
+    {city_check = false}
+
+    return dt_check && city_check && state_check && country_check && shape_check
 };
